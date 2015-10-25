@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Trying to Learn 3D Shape (1)"
+title:  "Learning 3D Shape (1)"
 date:   2015-10-24 11:09:18
 categories: jekyll update
 ---
@@ -24,7 +24,7 @@ An algorithm I've been wanting to implement for a while is the Recurrent Attenti
 
 The network can predict any potential camera location within a given range, but we can't render an image for every possible camera position in advance. So what I really should have done was take maybe 100 or 500 or a million renders for each object from different camera positions and feed the network the render whose position matches the network's position output the closest. Here's what I did instead...
 
-![Taking lots of renders](video {{ site.url }}/assets/out.webm)
+{% video {{ site.url }}/assets/out.webm %}
 
 I loaded all the .off models from the Princeton dataset into Blender (a 3D modeling tool) and saved them down in batches. Then I set up a simple python http server _inside_ Blender which could receive commands to position the camera at a certain position and render one of the models. (Ok the http server isn't really that simple to get it to work inside python but all of the hard work was done by akloster[^3]. I just built a little bit on top of it.)
 These renders are then all taken in to the network as a batch and then the network outputs the locations of the next renders which are then sent over to the Blender server and the process repeats. So for each object for each camera position the Blender process will render a new image on the fly and save it down. This is terribly inefficient for a number of reasons, but at least it looks cool.
