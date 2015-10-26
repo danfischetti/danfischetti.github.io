@@ -82,6 +82,8 @@ So it's not really clear to me why this helps with the training. I suppose passi
 
 Anyway I'm fairly happy with the classifier which was really only an exercise to develop the architecture needed to work on the shape inference problem so the next post will be about that.
 
+[Link to Github repo](https://github.com/danfischetti/shape-classifier)
+
 [^1]:http://shape.cs.princeton.edu/benchmark/
 [^2]:http://arxiv.org/abs/1406.6247
 [^3]:https://github.com/akloster/blender-asyncio
