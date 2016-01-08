@@ -5,6 +5,8 @@ date:   2016-01-04 17:06:18
 categories: jekyll update
 ---
 
+(Update: New architecture with better results [here]({{site.url}}/jekyll/update/2016/01/07/convolutional-shape-encoder.html))
+
 So after a few weeks of chugging away at lots of different model/parameter combinations I've settled on an architecture that performs reasonably well on the task I described in the last post. Namely, given a sequence of glimpses $$w_t$$ of a 3D model, generate an image $$I$$ of that model from a given viewpoint $$p$$.
 
 $$I = f(p,W_T), W_T = \{w_t:(I_t,p_t),t \leq T\}$$
