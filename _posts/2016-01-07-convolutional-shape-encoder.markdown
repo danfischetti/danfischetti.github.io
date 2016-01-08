@@ -67,7 +67,7 @@ And the error is propagated back through the entire decoder and encoder. Trainin
 
 ##Results
 
-After training the average squared error on validation set is less than 0.0024, which leads to the output images coming out pretty similar visually to the targets they're tested against.
+After training the average squared error on validation set is less than 0.0024, which leads to the output images coming out pretty similar visually to the targets they're tested against. (OK it does a pretty bad job on the glasses)
 
 ![Test Samples 1]({{ site.url }}/assets/conv_valid1.png)
 ![Test Samples 2]({{ site.url }}/assets/conv_valid2.png)
