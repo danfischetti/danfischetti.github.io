@@ -33,7 +33,7 @@ $$g_{l0} = ReLU(Linear(l_{out}))$$
 
 This new vector is then transformed into two new location vectors vectors $$g_{l1}$$ and $$g_{l2}$$
 
-$$g_{l1} = Linear(g_l0), g_{l2} = Linear(g_l0)$$
+$$g_{l1} = Linear(g_{l0}), g_{l2} = Linear(g_{l0})$$
 
 With the linear maps being independent of one another. The shape vector $$h_T$$ is passed through a ReLU layer with output size the same as the location vectors.
 
