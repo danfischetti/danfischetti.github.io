@@ -80,4 +80,6 @@ Also the network is able to learn a smooth function for viewpoint transformation
 
 [Link to Github repo](https://github.com/danfischetti/shape-encoder)
 
+[^1]:http://arxiv.org/abs/1511.08228
+
 
