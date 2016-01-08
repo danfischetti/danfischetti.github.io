@@ -27,7 +27,7 @@ These vectors are passed into an LSTM
 
 $$h_t = LSTM(g_t,h_{t-1})$$
 
-The tricky part is then to take this final vector $$h_T$$, which we want to contain information about the 3D shape of the object, with the desired viewpoint $$l_{out}$$ and generate an image. A few resources ([1]) have suggested multiplicative interactions for combining separate pieces of information so I went with a slight variation on that. First the output viewpoint $$l_{out}$$ is transformed into a higher dimensional vector through a linear transformation and ReLU activation
+The tricky part is then to take this final vector $$h_T$$, which we want to contain information about the 3D shape of the object, with the desired viewpoint $$l_{out}$$ and generate an image. A few resources ([^1]) have suggested multiplicative interactions for combining separate pieces of information so I went with a slight variation on that. First the output viewpoint $$l_{out}$$ is transformed into a higher dimensional vector through a linear transformation and ReLU activation
 
 $$g_{l0} = ReLU(Linear(l_{out}))$$
 
@@ -91,7 +91,7 @@ So the model does a good job of generalizing over viewpoints and an ok job of ge
 
 More data is going to improve the results and reduce overfitting 99 times out of 100, so if anyone knows of a similar freely available dataset which contains lots of 3D objects of various types let me know.
 
-I also think that by flattening the feature maps and then going back to a 3D tensor makes it hard to recover the spatial information. I hadn't thought of a good way to combine an LSTM type model with convolutional nets but looking at the recent success of Neural GPUs [3] it seems like a similar architecture could really improve my results. Look out for my next blog post and I'll tell you if it works. I promise I'll tell you even if it doesn't. 
+I also think that by flattening the feature maps and then going back to a 3D tensor makes it hard to recover the spatial information. I hadn't thought of a good way to combine an LSTM type model with convolutional nets but looking at the recent success of Neural GPUs [^2] it seems like a similar architecture could really improve my results. Look out for my next blog post and I'll tell you if it works. I promise I'll tell you even if it doesn't. 
 
 
 [^1]:http://arxiv.org/abs/1406.6247
