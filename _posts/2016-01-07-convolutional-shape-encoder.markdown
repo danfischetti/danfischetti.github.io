@@ -55,7 +55,7 @@ $$x_{enc} = S_{v3} = CGRU2(S_{v2})$$
 
 The point of using the gated units is to allow signal and gradient information to bypass layers unchanged to allow for deeper networks without exploding/vanishing gradients. I've only used 3 layers so could could probably get away with just convolutions without any of the gates, but this allows me to scale up without much need for fine tuning and careful initialization.
 
-This tensor $$x_enc$$ is passed into a convolutional decoder with a symmetrical architecture to the first stage encoder. (i.e. 3 layers,5x5 convolutions,2x2 unpooling).
+This tensor $$x_{enc}$$ is passed into a convolutional decoder with a symmetrical architecture to the first stage encoder. (i.e. 3 layers,5x5 convolutions,2x2 unpooling).
 
 ![Architecture]({{ site.url }}/assets/ConvShapeEncoder.png)
 
