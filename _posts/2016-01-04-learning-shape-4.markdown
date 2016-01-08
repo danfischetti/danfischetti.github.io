@@ -11,7 +11,7 @@ $$I = f(p,W_T), W_T = \{w_t:(I_t,p_t),t \leq T\}$$
 
 First I'll get into the architecture I used to accomplish this and then describe the various tricks that had to go into this to get the results halfway decent.
 
-#Architecture
+##Architecture
 
 In all the experiments I used 4 glimpses of each (3D) model as inputs to the network. An important difference from my last experiment is that the glimpses are prerendered instead of during training time which greatly speeds up training time. Each 64x64 image is first encoded with a 3 layer convolutional network with {32,64,128} feature maps in each layer, with ReLU activations and max pooling. The result is a 128x8x8 map $$x_enc$$ for each image. This map is flattened and passed through a linear transformation and a ReLU layer to obtain the feature vector $$g_x$$. 
 
@@ -49,29 +49,31 @@ $$L = \sum (x_{out}-x_{target})^2$$
 
 The error from this criterion is then propagated back through the entire network. The Adam algorithm was used for optimization.
 
-#Tips and Tricks for Training
+![Architecture]({{ site.url }}/assets/ShapeEncoder.png)
 
-##Data Augmentation
+##Tips and Tricks for Training
+
+#Data Augmentation
 
 I've been working with the Princeton Shape Benchmark dataset which has a fairly wide variety of models but only contains about 1000 of them which as far as "Big Data" is concerned is not very big at all. This can be remedied somewhat as 3D models lend themselves very well to augmentation. Before each set of renders is taken (4 initial glimpses and then the target renders) the model is rotated and scaled by a random factor, and multiple render sets of each model are taken to artificially enhance the size of the training set.
 
-##Space Filling
+#Space Filling
 
 Instead of using a PRNG to sample viewpoints from which to generate target images I generated quasirandom numbers to ensure the coordinate space was covered as fully as possible. NAME has a great post on quasirandom sequences if you want to read more about them. I used a Halton sequence to generate values of theta and z, keeping r and z_look constant to simplify the problem somewhat.
 
-##Dropout
+#Dropout
 
 This is one of the best known regularization techniques right now so I don't have too much to say about it. Dropout after the second convolutional encoder layer helped reduce overfitting but adding dropout to additional layers further slows convergence without seeming to help validation/test performance much or at all.
 
-##Batch Normalization
+#Batch Normalization
 
 Batch Normalization helps alot with convergence but should be used carefully. For a week or so the network wouldn't learn anything but an average of the target images until I removed Batch Normalization from the combining portion of the network (g_l1 and g_l2 layers). I'm still not entirely sure why this was the case but it seems like constraining vectors that are being multiplied together to be normalized restricts the range of functions it can represent.
 
-##Auxiliary Training
+#Auxiliary Training
 
 Since the output shape of the encoder map is the same as the input shape of the decoder, I can give those two parts of the model a separate task to help these two components learn good features. The output of the encoded glimpses is fed into the decoder, which tries to recreate the original image. So this is basically training an autoencoder in addition to the full network. The gradients from this are multiplied by a small multiplicative factor and added to the full gradient before the parameters are adjusted.
 
-#Results
+##Results
 
 Samples from the training set compared against their training targets:
 
